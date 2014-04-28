@@ -14,7 +14,10 @@ from django.views.decorators.csrf import csrf_protect
 def user_login(request):
 	c = {}
 	c.update(csrf(request))
-	return render_to_response('login.html',c)
+	if request.user.is_authenticated():
+		return render_to_response('loggedin.html',c)
+	else:
+		return render_to_response('login.html',c)	
 
 def auth_view(request):
 	username = request.POST.get('username','')
