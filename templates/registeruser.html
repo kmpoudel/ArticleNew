@@ -6,25 +6,35 @@
 <head>
 {% load staticfiles %}
 <meta charset="utf-8">
-<title>Paper Stack</title>
+<title>Article - Reigister User</title>
 <link rel="stylesheet" type="text/css" href="{% static 'css/loginstyle.css' %}" />
 </head>
 <body>
 <div class="container">
 	<section id="content">
-		<form action="/blog/auth/" method="post">{% csrf_token %}
+		<form action="/blog/register/" method="post">{% csrf_token %}
 			
-			<h1>Login Form</h1>
+			<h1>User Registration Form</h1>
+			<div>
+				<input type="text" placeholder="First Name" required="" id="firstname" name="firstname" />
+			</div>
+			<div>
+				<input type="text" placeholder="Lastname" required="" id="lastname" name="lastname" />
+			</div>
 			<div>
 				<input type="text" placeholder="Username" required="" id="username" name="username" />
 			</div>
 			<div>
-				<input type="password" placeholder="Password" required="" id="password" name="password"/>
+				<input type="text" placeholder="Email Address" required="" id="email" name="email" />
 			</div>
+			
 			<div>
-				<input type="submit" value="Log in" />
-				<a href="#">Lost your password?</a>
-				<a href="/blog/register/">Register</a>
+				<input type="password" placeholder="Confirm Password" required="" id="confirmpassword" name="confirmpassword"/>
+			</div>
+			
+			<div>
+				<input type="submit" value="Register" />
+				<a href="/blog/login/">Login</a>
 			</div>
 		</form><!-- form -->
 		<div class="button">
