@@ -12,6 +12,16 @@
 
 <form action="" method="post" class="form">
     {% csrf_token %}
+     {{ postform.as_p }}
+    {% for form in postform %}
+    <div class="form-group">
+    {{form.label}}
+    {{form.value}}
+
+    </div>
+    {% endfor %} 
+
+
     {% bootstrap_form postform %}
     {% buttons %}
         <button type="submit" class="btn btn-primary">

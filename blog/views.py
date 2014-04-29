@@ -77,8 +77,6 @@ class ListPost(ListView):
     def dispatch(self, request, *args, **kwargs):
         return super(ListPost, self).dispatch(request, *args, **kwargs)
 
-    def get_query_set(self):
-        return Post.objects.all()
 
 
 class DetailPost(DetailView):
