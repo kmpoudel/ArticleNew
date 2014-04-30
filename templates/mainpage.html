@@ -1,6 +1,0 @@
-<p>Hello you are in the main page</p>
-{% if user.is_authenticated %}
-Welcome {{ user.username }}
-{% else %}
-<a href="{% url 'login' %}">Click here to login</a> 
-{% endif %}

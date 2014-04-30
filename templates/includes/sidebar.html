@@ -1,23 +1,30 @@
-<div id="sidebar">
-		<div id="sidebar-bgtop"></div>
+
+	<div id="sidebar-bgtop"></div>
 		<div id="sidebar-content">
 			<div id="sidebar-bgbtm">
 			<ul>
-				<li>
-					<h2>Blog Titles</h2>
-					<ul>
-					{% if object_list%}
-					{% for post in object_list %}
-						<li><a href="#">{{ post.title}}</a></li>
-					{% endfor %}
-					{% else %}
-					{{post.title}}
-					{% endif %}
-					</ul>
-				</li>
-				
-			</ul>
+					<li>
+						<h2>Blog Titles</h2>
+						<ul>
+							{% if object_list%}
+							{% for post in object_list %}
+								<li><a class="{{post.id}}">{{ post.title}}</a></li>
+							{% endfor %}
+							{% else %}
+							{{post.title}}
+							{% endif %}
+						</ul>
+					</li>
+					<script type="text/javascript">
+						$("a").click(function(){
+							blogno=$(this).attr("class")
+		    				$(".post").load("/blog/"+blogno+"/fullpost/")
+		    				//alert($(this).attr('class'))
+		    				$("#currentblogno").val(blogno)
+		 				 });
+					</script>
+				</ul>
+			</div>
 		</div>
-		</div>
-	</div>
+
 	<!-- end #sidebar -->

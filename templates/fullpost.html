@@ -1,47 +1,36 @@
-{% include "header.html" %}
 
-<div id="wrapper">
-
-<div id="header">
-	<div id="logo">
-		<h1><a href="#">TechnoBlog</a></h1>
-		<p>
-		{% if user.is_authenticated %}
-		Welcome {{ user.username }}
-		<a href="{% url 'logout' %}">Logout</a>
-		
-		{% else %}
-		<a href={% url 'login' %}>Login</a>	
-		{% endif %}
-		</p>
-	</div>
-	<!-- end #logo -->
-	{% include "includes/menu.html" %}
-</div>
-<!-- end #header -->
-<div id="page">
-	<div id="header-pic"></div>
-	<div id="content">
-		<div class="post">
 			<h2 class="title">{{post.title}}</h2>
 			<p class="byline"><small>{{post.text}}...</small></p>
 			<div class="meta">
-				<p class="links"><a href="#" class="comments">Comments (32)</a> &nbsp;&bull;&nbsp;&nbsp;Author :: <a href="#" class="comments">{{ post.author }}</a> Created on :: {{ post.created_on }}</p>
+				<p class="links">Author :: <a href="#" class="comments">{{ post.author }}</a> Created on :: {{ post.created_on }}</p>
+			</div>
+			<table class="table bordered ">
+				<tr><td>Comments</td><td align=right>Commentor</td></tr>
+			{% for comment in detailcomment %}
+				<tr>
+				<td>{{comment.text}}</td><td align="right">{{comment.name}}</td>
+				</tr>
+			{% endfor%}
+			</table>
+
+			<hr />
+			<p id='commentbox'>Add Comment</p>
+
+			<hr />
+			<div id="comment">
+			
+
 			</div>
 
-		</div>
-	</div>
-	<!-- end #content -->
-	{% include "includes/sidebar.html" %}
-	<div style="clear:both; margin:0;"></div>
-</div>
-<!-- end #page -->
+			<script type="text/javascript">
 
-</div>
+				$("#commentbox").click(function(){
+							
+		    				$("#comment").load("/blog/addcomment/")
+		    				$("#commentbox").hide()
+		    				
+		 				 });
 
-<div id="footer">
-	<p>&copy; 2014. All Rights Reserved. Design by <a href="kpoudel.com.np">Kmpoudel</a>.</p>
-</div>
-<!-- end #footer -->
-</body>
-</html>
+			</script>
+
+	

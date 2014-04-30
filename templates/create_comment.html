@@ -1,0 +1,28 @@
+<form action="{% url 'addcomment' %}" method="POST" class="form" id="comform">
+    {% csrf_token %}
+
+     <!-- {{ commentform.as_p }} -->
+     	<p>Name<input type="text" name="name" ></p>
+     	<p>Email<input type="text" name="email"></p>
+     	<input type="hidden" name="post" id="post">
+     	<p>Text </p><p><textarea name="text" cols=70 rows=5>  </textarea></p>
+
+        <button id="submitme" class="btn btn-primary">
+		Comment
+        </button>
+       
+
+</form>
+
+<script type="text/javascript">
+$('#submitme').click(function(event) {
+	
+	a=$("#currentblogno").val()
+	//alert(a)
+	$("#post").val(a)
+	//alert($("#postid").val())
+	
+	$('#comform').submit();
+    
+});
+</script>

@@ -1,4 +1,4 @@
-{% load bootstrap3 %}
+<!-- {% load bootstrap3 %}
 
 {# Load CSS and JavaScript #}
 
@@ -8,24 +8,16 @@
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 
-{# Display a form #}
+{# Display a form #} -->
 
-<form action="" method="post" class="form">
+<form action="{% url 'addpost' %}" method="POST" class="form">
     {% csrf_token %}
      {{ postform.as_p }}
-    {% for form in postform %}
-    <div class="form-group">
-    {{form.label}}
-    {{form.value}}
-
-    </div>
-    {% endfor %} 
-
-
-    {% bootstrap_form postform %}
+    <!-- {% bootstrap_form postform %} -->
     {% buttons %}
         <button type="submit" class="btn btn-primary">
             {% bootstrap_icon "star" %} Submit
         </button>
     {% endbuttons %}
+    
 </form>

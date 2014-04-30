@@ -8,8 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import CreateView, ListView, DetailView
-from blog.models import Post
-from blog.forms import PostForm
+from blog.models import Post, Comment
+from blog.forms import PostForm, CommentForm
 
 # Create your views here.
 
@@ -63,17 +63,40 @@ class AddPost(CreateView):
         
 
     def post(self, request, *args, **kwargs):
+        print "post"
         create_post = PostForm(request.POST)
         if create_post.is_valid():
             print "valid"
             create_post.save()
+        return HttpResponseRedirect("/")
 
+class AddComment(CreateView):
+    template_name='create_comment.html'
+    model=Comment 
+    form_class = CommentForm
+    #success_url = reverse_lazy("home")
+
+    # def get_template_name(self, request):
+    #     self.template_name='create_post.html'
+
+    def get(self, request):
+        context={'commentform': CommentForm()}
+        return render(request,self.template_name,context)
+        
+
+    def post(self, request):
+        
+        print "comment"
+        create_comment = CommentForm(request.POST)
+        if create_comment.is_valid():
+
+            create_comment.save()
+        return HttpResponseRedirect("/")
 
 class ListPost(ListView):
     template_name = 'mainblog.html'
     model = Post
-    paginate_by = 3
-
+    
     def dispatch(self, request, *args, **kwargs):
         return super(ListPost, self).dispatch(request, *args, **kwargs)
 
@@ -93,6 +116,8 @@ class DetailPost(DetailView):
     def get_context_data(self, **kwargs):
         context = super(DetailPost, self).get_context_data(**kwargs)
         context['detailpost'] = Post.objects.get(id=self.pk)
+        context['detailcomment'] = Comment.objects.filter(post=self.pk)
+
         print context
         return context
 

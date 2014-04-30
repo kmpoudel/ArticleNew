@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
     url(r'^blog/', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    #url(r'^$', 'blog.views.auth_view'),
+   
     url(r'^$', ListPost.as_view(), name = 'listpost'),
     #url(r'^$', 'blog.views.mainpage',),
     
