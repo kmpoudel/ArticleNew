@@ -1,10 +1,17 @@
 {% include "header.html" %}
+<script type="text/javascript">
+	var pathname = window.location.pathname;
+	pathname = pathname.replace("/blog/", ""); 
+	pathname = pathname.replace("/mainblog2/", ""); 
+	$("#currentblogno").val(pathname);
+	
 
+</script>
 <div id="wrapper">
 
 <div id="header">
 	<div id="logo">
-		<h1><a href="#">TechnoBlog</a></h1>
+		<h1><a href="#">TechnoBlog </a></h1>
 		<p>
 		{% if user.is_authenticated %}
 		Welcome <span style="color:yellow; text-decoration:underline;">{{ user.username }}</span></p>
@@ -61,6 +68,22 @@
 						       
 
 			</form>
+			
+				<script type="text/javascript">
+				$('#submitme').click(function(event) {
+
+					
+					a=$("#currentblogno").val();
+					//alert(a)
+					$("#post").val(a);
+					
+//					alert($("#post").val());
+					//$("#conform").ajaxSubmit({url: '/blog/addcomment/', type: 'post'});
+					$("#conform").ajaxSubmit();
+					
+					
+				});
+				</script>
 
 
 			</div>
@@ -75,6 +98,7 @@
 	<div style="clear:both; margin:0;"></div>
 </div>
 <!-- end #page -->
+
 
 </div>
 

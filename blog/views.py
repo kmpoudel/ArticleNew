@@ -85,10 +85,16 @@ class AddComment(CreateView):
         
 
     def post(self, request):
+        a=request.POST.get('post')
+        print a
+        if request.GET:
+            print "get"
+        if request.POST:
+            print "post"
         create_comment = CommentForm(request.POST)
         if create_comment.is_valid():
             create_comment.save()
-        return HttpResponse("")
+        return HttpResponseRedirect("/blog/"+str(a)+"/mainblog2/")
 
 class ListPost(ListView):
     template_name = 'mainblog.html'
