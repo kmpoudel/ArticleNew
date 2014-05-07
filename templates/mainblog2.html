@@ -1,0 +1,86 @@
+{% include "header.html" %}
+
+<div id="wrapper">
+
+<div id="header">
+	<div id="logo">
+		<h1><a href="#">TechnoBlog</a></h1>
+		<p>
+		{% if user.is_authenticated %}
+		Welcome <span style="color:yellow; text-decoration:underline;">{{ user.username }}</span></p>
+		<p>
+		
+		<a href="{% url 'logout' %}">Logout</a>
+		
+		{% else %}
+		<a href={% url 'login' %}>Login</a>	
+		{% endif %}
+		</p>
+	</div>
+	<!-- end #logo -->
+	{% include "includes/menu.html" %}
+</div>
+<!-- end #header -->
+<div id="page">
+	<div id="header-pic"></div>
+	<div id="content">
+		<div class="post">
+			
+			<h2 class="title">{{post.title}}</h2>
+			<p class="byline"><small>{{post.text}}...</small></p>
+			<div class="meta">
+				<p class="links">Author :: <a href="#" class="comments">{{ post.author }}</a> Created on :: {{ post.created_on }}</p>
+			</div>
+			<table class="table bordered ">
+				<tr><td>Comments</td><td align=right>Commentor</td></tr>
+			{% for comment in detailcomment %}
+				<tr>
+				<td>{{comment.text}}</td><td align="right">{{comment.name}}</td>
+				</tr>
+			{% endfor%}
+			</table>
+
+			<hr />
+			
+
+
+			
+			<div id="comment"><p>Add Comment:</p><br />
+						<form action="{% url 'addcomment' %}" method="POST" class="form" id="comform">
+						    {% csrf_token %}
+
+						     <!-- {{ commentform.as_p }} -->
+						     	<p>Name<input type="text" name="name" ></p>
+						     	<p>Email<input type="text" name="email"></p>
+						     	<input type="hidden" name="post" id="post">
+						     	<p>Text </p><p><textarea name="text" cols=70 rows=5>  </textarea></p>
+
+						        <button id="submitme" class="btn btn-primary">
+								Comment
+						        </button>
+						       
+
+			</form>
+
+
+			</div>
+
+		</div>
+
+	</div>
+	<!-- end #content -->
+	<div id="sidebar">
+		{% include "includes/sidebar.html" %}
+	</div>
+	<div style="clear:both; margin:0;"></div>
+</div>
+<!-- end #page -->
+
+</div>
+
+<div id="footer">
+	<p>&copy; 2014. All Rights Reserved. Design by <a href="kpoudel.com.np">Kmpoudel</a>.</p>
+</div>
+<!-- end #footer -->
+</body>
+</html>

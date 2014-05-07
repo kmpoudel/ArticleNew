@@ -1,18 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>TechnoBlog</title>
+
 {% load staticfiles %}
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
 {% load bootstrap3 %}
 {% bootstrap_css %}
-{% bootstrap_javascript %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/mainblogstyle.css' %}" media="screen" />
-<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+
 <script type="text/javascript">
 	$(document).ready(function(){
-	}
+
+	});
 </script>
 </head>
 <body>
-<input type="text" name="currentblogno" id="currentblogno" />
+<input type="hidden" name="currentblogno" id="currentblogno" />

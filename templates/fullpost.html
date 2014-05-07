@@ -14,23 +14,56 @@
 			</table>
 
 			<hr />
-			<p id='commentbox'>Add Comment</p>
-
-			<hr />
-			<div id="comment">
 			
+
+			
+			<div id="comment">Add a comment<br />
+			<form action="" method="POST" class="form" id="comform">
+						    {% csrf_token %}
+
+						     <!-- {{ commentform.as_p }} -->
+						     	<p>Name<input type="text" name="name" id='name'></p>
+						     	<p>Email<input type="text" name="email" id='email'></p>
+						     	<input type="hidden" name="post" id="post">
+						     	<p>Text </p><p><textarea name="text" id='text' cols=70 rows=5>  </textarea></p>
+
+						        <button id="submitme" class="btn btn-primary">
+								Comment
+						        </button>
+						       
+
+						</form>
+
+				<script type="text/javascript">
+				$('#submitme').click(function(event) {
+					alert('asf');
+					
+					a=$("#currentblogno").val()
+					//alert(a)
+					$("#post").val(a)
+					//alert($("#postid").val())
+					name=$('#name').val();
+					email=$('#email').val();
+					post=$('#post').val();
+					text=$('#text').val();
+
+					conform=$("#conform");
+
+					alert(name+email+post+text);
+					
+						$.ajax({
+								type: "POST",
+								url : "/blog/addcomment/",
+								datatype : "json",
+								async: "true", 
+								data:conform.serialize(),
+								success: function(){
+
+								}
+						});
+				});
+				</script>
 
 			</div>
 
-			<script type="text/javascript">
-
-				$("#commentbox").click(function(){
-							
-		    				$("#comment").load("/blog/addcomment/")
-		    				$("#commentbox").hide()
-		    				
-		 				 });
-
-			</script>
-
-	
+		

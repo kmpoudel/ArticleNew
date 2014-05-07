@@ -6,9 +6,9 @@
 					<li>
 						<h2>Blog Titles</h2>
 						<ul>
-							{% if object_list%}
+							{% if object_list %}
 							{% for post in object_list %}
-								<li><a class="{{post.id}}">{{ post.title}}</a></li>
+								<li><a href="/blog/{{post.id}}/mainblog2" id="{{post.id}}" class="sidebar">{{ post.title}}</a></li>
 							{% endfor %}
 							{% else %}
 							{{post.title}}
@@ -16,12 +16,18 @@
 						</ul>
 					</li>
 					<script type="text/javascript">
-						$("a").click(function(){
-							blogno=$(this).attr("class")
-		    				$(".post").load("/blog/"+blogno+"/fullpost/")
-		    				//alert($(this).attr('class'))
-		    				$("#currentblogno").val(blogno)
-		 				 });
+					
+
+							$("a.sidebar").click(function(event){
+									event.preventDefault();
+		    						blogno=$(this).attr("id");
+				    				$(".post").load("/blog/"+blogno+"/fullpost/");
+				    				$("#currentblogno").val(blogno);
+				    				
+
+  							});   
+
+						
 					</script>
 				</ul>
 			</div>

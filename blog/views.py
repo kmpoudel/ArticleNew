@@ -85,13 +85,10 @@ class AddComment(CreateView):
         
 
     def post(self, request):
-        
-        print "comment"
         create_comment = CommentForm(request.POST)
         if create_comment.is_valid():
-
             create_comment.save()
-        return HttpResponseRedirect("/")
+        return HttpResponse("")
 
 class ListPost(ListView):
     template_name = 'mainblog.html'
@@ -106,28 +103,28 @@ class DetailPost(DetailView):
     template_name = 'fullpost.html'
     model = Post
 
-    def dispatch(self, request, *args, **kwargs):
-        return super(DetailPost, self).dispatch(request, *args, **kwargs)
-
     def get(self, request, pk):
         self.pk=pk
         return super(DetailPost,self).get(request,pk)
 
     def get_context_data(self, **kwargs):
         context = super(DetailPost, self).get_context_data(**kwargs)
-        context['detailpost'] = Post.objects.get(id=self.pk)
         context['detailcomment'] = Comment.objects.filter(post=self.pk)
-
-        print context
         return context
 
-    def get_success_url(self):
-        return reverse('detailpost') 
+class DetailPost2(DetailView):
+    template_name = 'mainblog2.html'
+    model = Post
 
+    def get(self, request, pk):
+        self.pk=pk
+        return super(DetailPost2,self).get(request,pk)
 
-
-
-
+    def get_context_data(self, **kwargs):
+        context = super(DetailPost2, self).get_context_data(**kwargs)
+        context['object_list']= Post.objects.all()
+        context['detailcomment'] = Comment.objects.filter(post=self.pk)
+        return context
     
     
 
